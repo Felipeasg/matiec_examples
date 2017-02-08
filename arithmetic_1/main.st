@@ -1,0 +1,25 @@
+PROGRAM My_Program
+  VAR
+    var1 AT %IW0.0 : INT := 0;
+    var2 AT %IW0.1 : INT := 0;
+    var3 AT %IW0.2 : INT := 0;
+    var4 AT %QW0.0 : INT;
+  END_VAR
+  VAR
+    MUL22_OUT : INT;
+    ADD24_OUT : INT;
+  END_VAR
+
+  MUL22_OUT := MUL(var1, var2);
+  ADD24_OUT := ADD(MUL22_OUT, var3);
+  var4 := ADD24_OUT;
+END_PROGRAM
+
+
+CONFIGURATION STD_CONF
+
+  RESOURCE STD_RESSOURCE ON PLC
+    TASK TaskMain(INTERVAL := T#50ms,PRIORITY := 0);
+    PROGRAM Inst0 WITH TaskMain : My_Program;
+  END_RESOURCE
+END_CONFIGURATION
