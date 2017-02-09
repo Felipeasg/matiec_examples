@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="http://www.plcopen.org/xml/tc6_0201">
+  <fileHeader companyName="Blank" productName="Blank" productVersion="1.0" creationDateTime="2016-05-18T21:14:07"/>
+  <contentHeader name="Blank Project" modificationDateTime="2017-02-08T16:49:05">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="10" y="10"/>
+      </fbd>
+      <ld>
+        <scaling x="10" y="10"/>
+      </ld>
+      <sfc>
+        <scaling x="10" y="10"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="My_Program" pouType="program">
+        <interface>
+          <localVars>
+            <variable name="iniciar" address="%IX0.0">
+              <type>
+                <BOOL/>
+              </type>
+              <initialValue>
+                <simpleValue value="TRUE"/>
+              </initialValue>
+            </variable>
+            <variable name="parar" address="%IX0.1">
+              <type>
+                <BOOL/>
+              </type>
+              <initialValue>
+                <simpleValue value="TRUE"/>
+              </initialValue>
+            </variable>
+            <variable name="lamp" address="%QX0.0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <LD>
+            <comment localId="1" height="40" width="690">
+              <position x="20" y="20"/>
+              <content>
+                <xhtml:p><![CDATA[Start writing your program here]]></xhtml:p>
+              </content>
+            </comment>
+            <leftPowerRail localId="2" height="40" width="10">
+              <position x="10" y="110"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <contact localId="3" height="20" width="30" negated="false">
+              <position x="90" y="120"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="2">
+                  <position x="90" y="130"/>
+                  <position x="20" y="130"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="30" y="10"/>
+              </connectionPointOut>
+              <variable>iniciar</variable>
+            </contact>
+            <rightPowerRail localId="6" height="40" width="10">
+              <position x="710" y="110"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="7">
+                  <position x="710" y="130"/>
+                  <position x="640" y="130"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <coil localId="7" height="20" width="30" negated="false">
+              <position x="610" y="120"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="15" formalParameter="OUT">
+                  <position x="610" y="130"/>
+                  <position x="380" y="130"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="30" y="10"/>
+              </connectionPointOut>
+              <variable>lamp</variable>
+            </coil>
+            <leftPowerRail localId="12" height="70" width="10">
+              <position x="10" y="150"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="10" y="40"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <block localId="15" typeName="AND" height="140" width="110">
+              <position x="270" y="80"/>
+              <inputVariables>
+                <variable formalParameter="IN1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="50"/>
+                    <connection refLocalId="3">
+                      <position x="270" y="130"/>
+                      <position x="120" y="130"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="IN2">
+                  <connectionPointIn>
+                    <relPosition x="0" y="110"/>
+                    <connection refLocalId="18">
+                      <position x="270" y="190"/>
+                      <position x="120" y="190"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables/>
+              <outputVariables>
+                <variable formalParameter="OUT">
+                  <connectionPointOut>
+                    <relPosition x="110" y="50"/>
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <contact localId="18" height="20" width="30" negated="false">
+              <position x="90" y="180"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="12">
+                  <position x="90" y="190"/>
+                  <position x="20" y="190"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="30" y="10"/>
+              </connectionPointOut>
+              <variable>parar</variable>
+            </contact>
+          </LD>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="STD_CONF">
+        <resource name="STD_RESSOURCE">
+          <task name="TaskMain" priority="0" interval="T#50ms">
+            <pouInstance name="Inst0" typeName="My_Program"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+</project>

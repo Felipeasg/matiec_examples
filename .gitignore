@@ -9,6 +9,16 @@ and_logic/STD_CONF.h
 and_logic/STD_RESSOURCE.c
 and_logic/softplc
 
+and_logic_debug/*.o
+and_logic_debug/POUS.c
+and_logic_debug/POUS.h
+and_logic_debug/LOCATED_VARIABLES.h
+and_logic_debug/VARIABLES.csv
+and_logic_debug/STD_CONF.c
+and_logic_debug/STD_CONF.h
+and_logic_debug/STD_RESSOURCE.c
+and_logic_debug/softplc
+
 arithmetic_1/*.o
 arithmetic_1/POUS.c
 arithmetic_1/POUS.h
