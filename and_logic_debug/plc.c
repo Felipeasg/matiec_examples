@@ -89,24 +89,24 @@ static unsigned int retain_offset = 0;
 #undef __LOCATED_VAR
 
 
-#define __Unpack_case_t(TYPENAME) \                                                                           
-	        case TYPENAME##_ENUM : \                                                                               
-            *flags = ((__IEC_##TYPENAME##_t *)varp)->flags; \                                                  
-            forced_value_p = *real_value_p = &((__IEC_##TYPENAME##_t *)varp)->value; \                         
+#define __Unpack_case_t(TYPENAME)\
+	        case TYPENAME##_ENUM :\
+			*flags = ((__IEC_##TYPENAME##_t *)varp)->flags; \
+            forced_value_p = *real_value_p = &((__IEC_##TYPENAME##_t *)varp)->value; \
             break;                                                                                            
                                                                                                               
-#define __Unpack_case_p(TYPENAME)\                                                                            
-        case TYPENAME##_O_ENUM :\                                                                             
-            *flags = __IEC_OUTPUT_FLAG;\                                                                      
-        case TYPENAME##_P_ENUM :\                                                                             
-            *flags |= ((__IEC_##TYPENAME##_p *)varp)->flags;\                                                 
-            *real_value_p = ((__IEC_##TYPENAME##_p *)varp)->value;\                                           
-            forced_value_p = &((__IEC_##TYPENAME##_p *)varp)->fvalue;\                                        
-            break;    
+#define __Unpack_case_p(TYPENAME)\
+        case TYPENAME##_O_ENUM :\
+			*flags = __IEC_OUTPUT_FLAG;\
+        case TYPENAME##_P_ENUM :\
+			*flags |= ((__IEC_##TYPENAME##_p *)varp)->flags;\
+            *real_value_p = ((__IEC_##TYPENAME##_p *)varp)->value;\
+            forced_value_p = &((__IEC_##TYPENAME##_p *)varp)->fvalue;\
+            break;
 
 static int tick = 0;
 
-#define BUFFER_SIZE     1024
+//#define BUFFER_SIZE     1024
 
 //extern MY_PROGRAM INST0;
 
@@ -196,8 +196,11 @@ static inline void BufferIterator(dbgvardsc_t *dsc, int do_debug)
                 /* copy data to the buffer */                                                                 
                 memcpy(buffer_cursor, visible_value_p, size);                                                 
 
-				printf("buffer_cursor[0] = %u\n", debug_buffer[0]);
-				printf("buffer_cursor[1] = %u\n", debug_buffer[1]);
+				printf("buffer_cursor[0] = %u\n", buffer_cursor[0]);
+				printf("buffer_cursor[1] = %u\n", buffer_cursor[1]);
+				printf("buffer_cursor[2] = %u\n", buffer_cursor[2]);
+				printf("buffer_cursor[3] = %u\n", buffer_cursor[3]);
+
 	
                 /* increment cursor according size*/                                                          
                 buffer_cursor = next_cursor;                                                                  
@@ -224,13 +227,18 @@ void DebugIterator(dbgvardsc_t *dsc){
     BufferIterator(dsc, 1);                                                                                   
 }    
 
+                                                                                                              
+void RetainIterator(dbgvardsc_t *dsc){                                                                        
+    BufferIterator(dsc, 0);                                                                                   
+}   
+
 void run()
 {
 
 
 	BOOL var;
 
-    *__IX0_1 = (BOOL)0;
+    *__IX0_1 = (BOOL)1;
 	*__IX0_0 = (BOOL)1;
 
 #if 0
@@ -260,11 +268,12 @@ void run()
 
 	printf("\n");
 
-#if 0
+#if 1
 	/* Reset buffer cursor */                                                                         
     buffer_cursor = debug_buffer;                                                                     
     /* Iterate over all variables to fill debug buffer */                                             
     __for_each_variable_do(DebugIterator);   
+//	__for_each_variable_do(RetainIterator);
 #endif
 
 }
