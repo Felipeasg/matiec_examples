@@ -6,7 +6,7 @@ MATIEC is a opensource compiler for programming languages defined in IEC 61131-3
 
 ## Installing MATIEC
 
-	To compile MATIEC you need to download and install [flex](https://github.com/westes/flex) and [bison](https://www.gnu.org/software/bison/). You can download compile and isntall or use your preferred package manager.
+To compile MATIEC you need to download and install [flex](https://github.com/westes/flex) and [bison](https://www.gnu.org/software/bison/). You can download compile and isntall or use your preferred package manager.
 	
 ```
 	$ cd ~/
@@ -19,7 +19,7 @@ MATIEC is a opensource compiler for programming languages defined in IEC 61131-3
 
 ## Setting some enviromnent variables
 
-	To use MATIEC is need define some enviromnent variables used in the makefile of the examples
+To use MATIEC is need define some enviromnent variables used in the makefile of the examples
 
 ```
 	$ export MATIEC_INCLUDE_PATH=~/matiec/lib
@@ -29,7 +29,7 @@ MATIEC is a opensource compiler for programming languages defined in IEC 61131-3
 
 # Compiling the examples
 
-	You can edit the logic using PLCOpenEditor from [Beremiz project](http://www.beremiz.org/). The project format is a XML format for IEC 61131-3.
+You can edit the logic using PLCOpenEditor from [Beremiz project](http://www.beremiz.org/). The project format is a XML format for IEC 61131-3.
 
 ```
 	$ cd ~/
@@ -39,4 +39,4 @@ MATIEC is a opensource compiler for programming languages defined in IEC 61131-3
 	$ make
 ``` 
 
-	This will generate a executable softplc.
+This will generate a executable softplc.
