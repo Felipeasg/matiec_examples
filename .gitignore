@@ -1,2 +1,9 @@
 *.o
+rm POUS.c
+rm POUS.h
+rm LOCATED_VARIABLES.h
+rm VARIABLES.csv
+rm STD_CONF.c
+rm STD_CONF.h
+rm STD_RESSOURCE.c
 softplc
