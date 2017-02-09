@@ -113,7 +113,7 @@ static int tick = 0;
 /***                                                                                                          
  * Declare global variables from resources and conf                                                           
  **/                                                                                                          
-extern __IEC_INT_t CONFIG__RESETCOUNTERVALUE;                                                                 
+__IEC_INT_t CONFIG__RESETCOUNTERVALUE;                                                                 
 //extern PLC_PRG STD_RESSOURCE__INST0;
 extern MY_PROGRAM STD_RESSOURCE__INST0;
 
@@ -123,7 +123,7 @@ typedef const struct {
 } dbgvardsc_t;  
 
 static dbgvardsc_t dbgvardsc[] = {                                                                            
-//{&(CONFIG__RESETCOUNTERVALUE), INT_ENUM},                                                                     
+{&(CONFIG__RESETCOUNTERVALUE), INT_ENUM},                                                                     
 {&(STD_RESSOURCE__INST0.INICIAR), BOOL_ENUM},                                                           
 {&(STD_RESSOURCE__INST0.PARAR), BOOL_ENUM},                                                              
 {&(STD_RESSOURCE__INST0.LAMP), BOOL_ENUM},
@@ -238,8 +238,8 @@ void run()
 
 	BOOL var;
 
-    *__IX0_1 = (BOOL)1;
-	*__IX0_0 = (BOOL)1;
+    *__IX0_1 = (BOOL)0;
+	*__IX0_0 = (BOOL)0;
 
 #if 0
 	visible_value_p = UnpackVar(&dbgvardsc[0], &real_value_p, &flags);
@@ -263,12 +263,14 @@ void run()
 	printf("\n");
 
 	printf("INICIAR: %s\n", (BOOL)__GET_LOCATED(STD_RESSOURCE__INST0.INICIAR,)? "TRUE" : "FALSE");
+	printf("INICIAR: %s\n", (BOOL)*STD_RESSOURCE__INST0.INICIAR.value ? "TRUE" : "FALSE");
+
 	printf("PARAR: %s\n", (BOOL)__GET_LOCATED(STD_RESSOURCE__INST0.PARAR,)? "TRUE" : "FALSE");
 	printf("LAMP: %s\n", (BOOL)__GET_LOCATED(STD_RESSOURCE__INST0.LAMP,)? "TRUE" : "FALSE");
 
 	printf("\n");
 
-#if 1
+#if 0
 	/* Reset buffer cursor */                                                                         
     buffer_cursor = debug_buffer;                                                                     
     /* Iterate over all variables to fill debug buffer */                                             
