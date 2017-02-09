@@ -1,0 +1,25 @@
+Quando o Beremiz compila um projeto ele gera um alguns arquivos padrões, tais como, plc_main.c e plc_debugger.c.
+
+O que foi feito no arquivo plc.c se baseia principalmente no arquivo plc_debugger.c, para se acessar variáveis do programa para que elas sejam 'debugadas' remotamente
+por algum tipo de protocolo, assim como é feito no RSLogix por exemplo no Monitor Tags.
+
+Porém ainda não descobri o porque não é possível acessar as variáveis da forma como foi feito no plc_main.c e plc_debugger.c caso as variáveis sejam declaradas como
+located, ou seja, quando se atribui um local (Location - PLCOpenEditor) para a variável, tal como %IX0.0, etc. Parece que essas variáveis devem ser acessadas preferencial
+mente pelas variávies padrão __IX0_0, __QX0_0, __IW0_0 ou QW0_0.
+
+Este programa estão visa mostrar isso.
+
+Todas as variáveis definidas no POUS.h foram colocada propositalmente na estutura de debug do plc.c, para se perceber que o valor delas saem errados quando as mesmas são 
+declaradas como located (__DECLARE_LOCATED) no arquivo POUS.h.
+
+Ainda não consegui descobri ao certo onde seria útil a varíave CONFIG__RESETCOUNTERVALUE...
+
+static dbgvardsc_t dbgvardsc[] = {
+{&(CONFIG__RESETCOUNTERVALUE), INT_ENUM},
+{&(STD_RESSOURCE__INST0.INICIAR), BOOL_ENUM},  //FIXME: EU ACHO QUE A VARIAVEL NÂO PODE SER LOCATED PARA SER DEBUGADA COMO É FEITO COM BEREMIZ
+{&(STD_RESSOURCE__INST0.PARAR), BOOL_ENUM},
+{&(STD_RESSOURCE__INST0.LAMP), BOOL_ENUM},
+{&(STD_RESSOURCE__INST0.AND15_OUT), BOOL_ENUM}
+};
+
+ 

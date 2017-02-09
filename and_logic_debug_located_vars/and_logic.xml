@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="http://www.plcopen.org/xml/tc6_0201">
   <fileHeader companyName="Blank" productName="Blank" productVersion="1.0" creationDateTime="2016-05-18T21:14:07"/>
-  <contentHeader name="Blank Project" modificationDateTime="2017-02-09T17:15:36">
+  <contentHeader name="Blank Project" modificationDateTime="2017-02-09T14:45:30">
     <coordinateInfo>
       <fbd>
         <scaling x="10" y="10"/>
@@ -20,23 +20,23 @@
       <pou name="My_Program" pouType="program">
         <interface>
           <localVars>
-            <variable name="iniciar">
+            <variable name="iniciar" address="%IX0.0">
               <type>
                 <BOOL/>
               </type>
               <initialValue>
-                <simpleValue value="FALSE"/>
+                <simpleValue value="TRUE"/>
               </initialValue>
             </variable>
-            <variable name="parar">
+            <variable name="parar" address="%IX0.1">
               <type>
                 <BOOL/>
               </type>
               <initialValue>
-                <simpleValue value="FALSE"/>
+                <simpleValue value="TRUE"/>
               </initialValue>
             </variable>
-            <variable name="lamp">
+            <variable name="lamp" address="%QX0.0">
               <type>
                 <BOOL/>
               </type>
@@ -87,7 +87,7 @@
                 <relPosition x="0" y="10"/>
                 <connection refLocalId="15" formalParameter="OUT">
                   <position x="610" y="130"/>
-                  <position x="410" y="130"/>
+                  <position x="380" y="130"/>
                 </connection>
               </connectionPointIn>
               <connectionPointOut>
@@ -102,13 +102,13 @@
               </connectionPointOut>
             </leftPowerRail>
             <block localId="15" typeName="AND" height="140" width="110">
-              <position x="300" y="80"/>
+              <position x="270" y="80"/>
               <inputVariables>
                 <variable formalParameter="IN1">
                   <connectionPointIn>
                     <relPosition x="0" y="50"/>
                     <connection refLocalId="3">
-                      <position x="300" y="130"/>
+                      <position x="270" y="130"/>
                       <position x="120" y="130"/>
                     </connection>
                   </connectionPointIn>
@@ -117,7 +117,7 @@
                   <connectionPointIn>
                     <relPosition x="0" y="110"/>
                     <connection refLocalId="18">
-                      <position x="300" y="190"/>
+                      <position x="270" y="190"/>
                       <position x="120" y="190"/>
                     </connection>
                   </connectionPointIn>
