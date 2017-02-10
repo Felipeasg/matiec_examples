@@ -1,3 +1,24 @@
+FUNCTION_BLOCK BlockTest
+  VAR_INPUT
+    In : BOOL;
+  END_VAR
+  VAR_OUTPUT
+    Out : BOOL;
+  END_VAR
+  VAR
+    MYARRAY : ARRAY [0..5] OF INT;
+  END_VAR
+
+  In := Out;
+
+  MYARRAY[0] := 1;
+  MYARRAY[1] := 2;
+  MYARRAY[2] := 3;
+  MYARRAY[3] := 4;
+  MYARRAY[4] := 5;
+  MYARRAY[5] := 7;
+END_FUNCTION_BLOCK
+
 PROGRAM My_Program
   VAR
     iniciar : BOOL := FALSE;
@@ -24,14 +45,17 @@ PROGRAM My_Program
     test19 : WORD := 15;
     test20 : DWORD := 15;
     test21 : LWORD := 12315555;
-    test22 : ARRAY [0..3] OF SINT;
-    test23 : ARRAY [0..3] OF SINT;
+    BlockTest0 : BlockTest;
+    InputTest : BOOL := TRUE;
+    OutputTest : BOOL;
+    TestARRAY : ARRAY [0..4] OF SINT := [5(4)];
+    TestARRAY0 : ARRAY [0..4] OF SINT := [5, 4, 3, 2, 1];
     AND15_OUT : BOOL;
   END_VAR
 
   AND15_OUT := AND(iniciar, parar);
   lamp := AND15_OUT;
-  test23 := test22;
+  BlockTest0(In := InputTest);
 END_PROGRAM
 
 

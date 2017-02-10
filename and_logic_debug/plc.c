@@ -25,7 +25,6 @@
  * Simple PLC run cycle test implementation - prints every located at each cycle
  *
  */
-
 #include "iec_std_lib.h"
 #include "iec_types_all.h" 
 #include "POUS.h"
@@ -36,7 +35,7 @@
 #include <string.h>                                                                                           
 #include <stdio.h>                                                                                            
                                                                                                               
-#define BUFFER_SIZE 14                                                                                        
+#define BUFFER_SIZE 180
                                                                                                               
 /* Atomically accessed variable for buffer state */                                                           
 #define BUFFER_FREE 0                                                                                         
@@ -136,7 +135,29 @@ static dbgvardsc_t dbgvardsc[] = {
 {&(CONFIG__RESETCOUNTERVALUE), INT_ENUM},                                                                    
 {&(STD_RESSOURCE__INST0.INICIAR), BOOL_ENUM},
 {&(STD_RESSOURCE__INST0.PARAR), BOOL_ENUM}, 
-{&(STD_RESSOURCE__INST0.LAMP), BOOL_ENUM}, 
+{&(STD_RESSOURCE__INST0.LAMP), BOOL_ENUM},
+{&(STD_RESSOURCE__INST0.TEST1), SINT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST2), INT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST3), DINT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST4), LINT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST5), USINT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST6), UINT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST7), UDINT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST8), ULINT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST9), REAL_ENUM},
+{&(STD_RESSOURCE__INST0.TEST10), LREAL_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST11), TIME_ENUM},
+{&(STD_RESSOURCE__INST0.TEST12), TIME_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST13), TIME_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST14), DATE_ENUM},
+{&(STD_RESSOURCE__INST0.TEST15), TOD_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST16), DT_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST17), STRING_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST18), BYTE_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST19), WORD_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST20), DWORD_ENUM}, 
+{&(STD_RESSOURCE__INST0.TEST21), LWORD_ENUM}, 
+//{&(STD_RESSOURCE__INST0.TEST22), __ARRAY_OF_SINT_4_ENUM}, 
 {&(STD_RESSOURCE__INST0.AND15_OUT), BOOL_ENUM}
 };      
 
@@ -309,6 +330,24 @@ void RegisterDebugVariable(int idx /*, void* force*/)
     }
 }
 
+void RegisterDebugVariablesByPointer(dbgvardsc_t *dsc) {
+	
+	unsigned char flags = __IEC_DEBUG_FLAG;
+	void *varp = dsc->ptr;
+
+	switch(dsc->type){
+            __ANY(__RegisterDebugVariable_case_t)
+            __ANY(__RegisterDebugVariable_case_p)
+        default:     
+            break;   
+        } 
+}
+
+void RegisterAllDebugVariable(void) {
+
+	__for_each_variable_do(RegisterDebugVariablesByPointer);
+}
+
 #define __ResetDebugVariablesIterator_case_t(TYPENAME) \
         case TYPENAME##_ENUM :\
             ((__IEC_##TYPENAME##_t *)varp)->flags &= ~(__IEC_DEBUG_FLAG|__IEC_FORCE_FLAG);\
@@ -340,7 +379,6 @@ void ResetDebugVariables(void)
 #define __SetDebugVariable_case_t(TYPENAME)\
         case TYPENAME##_ENUM :\
              ((__IEC_##TYPENAME##_t *)varp)->value = *((TYPENAME *)force);\
-			 printf("1\n");\
             break;
 #define __SetDebugVariable_case_p(TYPENAME)\
         case TYPENAME##_P_ENUM :\
@@ -372,15 +410,27 @@ void run()
 	/* SET WHAT VARIABLES FROM dbgvardsc TABLE YOU WANT DEBUG.
 	   BY THE FILE VARIABLES.csv you can do the correct cast of debug_buffer 
 	*/
+#if 0
 //	RegisterDebugVariable(0);
 	RegisterDebugVariable(1);
 	RegisterDebugVariable(2);
 	RegisterDebugVariable(3);
-//	RegisterDebugVariable(4);
-
+	RegisterDebugVariable(4);
+	RegisterDebugVariable(5);
+	RegisterDebugVariable(6);
+	RegisterDebugVariable(7);
+	RegisterDebugVariable(8);
+	RegisterDebugVariable(9);
+	RegisterDebugVariable(10);
+	RegisterDebugVariable(11);
+	RegisterDebugVariable(12);
+	RegisterDebugVariable(13);
+	RegisterDebugVariable(14);
+#endif
+	RegisterAllDebugVariable();
 
 	/* Set values to debug variables */
-	BOOL value1 = (BOOL)0;
+	BOOL value1 = (BOOL)1;
 	BOOL value2 = (BOOL)1;
 
 	SetDebugVariable(1, &value1);

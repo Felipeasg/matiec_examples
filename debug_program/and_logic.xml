@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.plcopen.org/xml/tc6_0201" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="http://www.plcopen.org/xml/tc6_0201">
   <fileHeader companyName="Blank" productName="Blank" productVersion="1.0" creationDateTime="2016-05-18T21:14:07"/>
-  <contentHeader name="Blank Project" modificationDateTime="2017-02-10T19:17:18">
+  <contentHeader name="Blank Project" modificationDateTime="2017-02-10T16:29:55">
     <coordinateInfo>
       <fbd>
         <scaling x="10" y="10"/>
@@ -209,82 +209,24 @@
                 <simpleValue value="12315555"/>
               </initialValue>
             </variable>
-            <variable name="BlockTest0">
-              <type>
-                <derived name="BlockTest"/>
-              </type>
-            </variable>
-            <variable name="InputTest">
-              <type>
-                <BOOL/>
-              </type>
-              <initialValue>
-                <simpleValue value="TRUE"/>
-              </initialValue>
-            </variable>
-            <variable name="OutputTest">
-              <type>
-                <BOOL/>
-              </type>
-            </variable>
-            <variable name="TestARRAY">
+            <variable name="test22">
               <type>
                 <array>
-                  <dimension lower="0" upper="4"/>
+                  <dimension lower="0" upper="3"/>
                   <baseType>
                     <SINT/>
                   </baseType>
                 </array>
               </type>
-              <initialValue>
-                <arrayValue>
-                  <value repetitionValue="5">
-                    <simpleValue value="4"/>
-                  </value>
-                </arrayValue>
-              </initialValue>
-            </variable>
-            <variable name="TestARRAY0">
-              <type>
-                <array>
-                  <dimension lower="0" upper="4"/>
-                  <baseType>
-                    <SINT/>
-                  </baseType>
-                </array>
-              </type>
-              <initialValue>
-                <arrayValue>
-                  <value>
-                    <simpleValue value="5"/>
-                  </value>
-                  <value>
-                    <simpleValue value="4"/>
-                  </value>
-                  <value>
-                    <simpleValue value="3"/>
-                  </value>
-                  <value>
-                    <simpleValue value="2"/>
-                  </value>
-                  <value>
-                    <simpleValue value="1"/>
-                  </value>
-                </arrayValue>
-              </initialValue>
             </variable>
           </localVars>
         </interface>
         <body>
           <LD>
-            <comment localId="1" height="40" width="1070">
+            <comment localId="1" height="40" width="690">
               <position x="20" y="20"/>
               <content>
-                <xhtml:p><![CDATA[Start writing your program here
-
-ARRAY
-
-https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/18014398645789835.html&id=]]></xhtml:p>
+                <xhtml:p><![CDATA[Start writing your program here]]></xhtml:p>
               </content>
             </comment>
             <leftPowerRail localId="2" height="40" width="10">
@@ -337,14 +279,14 @@ https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/1
                 <relPosition x="10" y="40"/>
               </connectionPointOut>
             </leftPowerRail>
-            <block localId="15" typeName="AND" height="140" width="130">
-              <position x="280" y="80"/>
+            <block localId="15" typeName="AND" height="140" width="110">
+              <position x="300" y="80"/>
               <inputVariables>
                 <variable formalParameter="IN1">
                   <connectionPointIn>
                     <relPosition x="0" y="50"/>
                     <connection refLocalId="3">
-                      <position x="280" y="130"/>
+                      <position x="300" y="130"/>
                       <position x="120" y="130"/>
                     </connection>
                   </connectionPointIn>
@@ -353,7 +295,7 @@ https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/1
                   <connectionPointIn>
                     <relPosition x="0" y="110"/>
                     <connection refLocalId="18">
-                      <position x="280" y="190"/>
+                      <position x="300" y="190"/>
                       <position x="120" y="190"/>
                     </connection>
                   </connectionPointIn>
@@ -363,7 +305,7 @@ https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/1
               <outputVariables>
                 <variable formalParameter="OUT">
                   <connectionPointOut>
-                    <relPosition x="130" y="50"/>
+                    <relPosition x="110" y="50"/>
                   </connectionPointOut>
                 </variable>
               </outputVariables>
@@ -382,101 +324,7 @@ https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/1
               </connectionPointOut>
               <variable>parar</variable>
             </contact>
-            <block localId="19" typeName="BlockTest" instanceName="BlockTest0" height="80" width="130">
-              <position x="280" y="250"/>
-              <inputVariables>
-                <variable formalParameter="In">
-                  <connectionPointIn>
-                    <relPosition x="0" y="50"/>
-                    <connection refLocalId="20">
-                      <position x="280" y="300"/>
-                      <position x="130" y="300"/>
-                    </connection>
-                  </connectionPointIn>
-                </variable>
-              </inputVariables>
-              <inOutVariables/>
-              <outputVariables>
-                <variable formalParameter="Out">
-                  <connectionPointOut>
-                    <relPosition x="130" y="50"/>
-                  </connectionPointOut>
-                </variable>
-              </outputVariables>
-            </block>
-            <contact localId="20" height="20" width="30" negated="false">
-              <position x="100" y="290"/>
-              <connectionPointIn>
-                <relPosition x="0" y="10"/>
-                <connection refLocalId="21">
-                  <position x="100" y="300"/>
-                  <position x="20" y="300"/>
-                </connection>
-              </connectionPointIn>
-              <connectionPointOut>
-                <relPosition x="30" y="10"/>
-              </connectionPointOut>
-              <variable>InputTest</variable>
-            </contact>
-            <leftPowerRail localId="21" height="40" width="10">
-              <position x="10" y="280"/>
-              <connectionPointOut formalParameter="">
-                <relPosition x="10" y="20"/>
-              </connectionPointOut>
-            </leftPowerRail>
-            <rightPowerRail localId="22" height="40" width="10">
-              <position x="710" y="280"/>
-              <connectionPointIn>
-                <relPosition x="0" y="20"/>
-                <connection refLocalId="19" formalParameter="Out">
-                  <position x="710" y="300"/>
-                  <position x="410" y="300"/>
-                </connection>
-              </connectionPointIn>
-            </rightPowerRail>
           </LD>
-        </body>
-      </pou>
-      <pou name="BlockTest" pouType="functionBlock">
-        <interface>
-          <inputVars>
-            <variable name="In">
-              <type>
-                <BOOL/>
-              </type>
-            </variable>
-          </inputVars>
-          <outputVars>
-            <variable name="Out">
-              <type>
-                <BOOL/>
-              </type>
-            </variable>
-          </outputVars>
-          <localVars>
-            <variable name="MYARRAY">
-              <type>
-                <array>
-                  <dimension lower="0" upper="5"/>
-                  <baseType>
-                    <INT/>
-                  </baseType>
-                </array>
-              </type>
-            </variable>
-          </localVars>
-        </interface>
-        <body>
-          <ST>
-            <xhtml:p><![CDATA[In := Out;
-
-MYARRAY[0] := 1;
-MYARRAY[1] := 2;
-MYARRAY[2] := 3;
-MYARRAY[3] := 4;
-MYARRAY[4] := 5;
-MYARRAY[5] := 7;]]></xhtml:p>
-          </ST>
         </body>
       </pou>
     </pous>
