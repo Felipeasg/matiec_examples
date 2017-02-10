@@ -194,15 +194,19 @@ static inline void BufferIterator(dbgvardsc_t *dsc, int do_debug)
                                                                                                               
     visible_value_p = UnpackVar(dsc, &real_value_p, &flags);                                                  
 
+#ifdef PRINT_DEBUG
 	printf("flags: %01x\n", flags);    
 	printf("visible_value_p: %d\n", *(BOOL *)visible_value_p);
    	printf("forced_value_p: %d\n", *(BOOL *)real_value_p);
+#endif
 
     if(flags & ( __IEC_DEBUG_FLAG | __IEC_RETAIN_FLAG)){                                                      
         USINT size = __get_type_enum_size(dsc->type);                                                         
 
         if(flags & __IEC_DEBUG_FLAG){                                                                         
+#ifdef PRINT_DEBUG
 			printf("DEBUG\n");
+#endif
 			/* copy visible variable to buffer */
             if(do_debug){                                                                                     
                 /* compute next cursor positon.                                                               
@@ -216,19 +220,25 @@ static inline void BufferIterator(dbgvardsc_t *dsc, int do_debug)
                 char* next_cursor = buffer_cursor + size;                                                     
                 /* copy data to the buffer */                                                                 
                 memcpy(buffer_cursor, visible_value_p, size);                                                 
+#ifdef PRINT_DEBUG
 				printf("buffer_cursor = %d\n", buffer_cursor[0]);	
+#endif
 
                 /* increment cursor according size*/                                                          
                 buffer_cursor = next_cursor;                                                                  
             }                                                                                                 
             /* re-force real value of outputs (M and Q)*/                                                     
             if((flags & __IEC_FORCE_FLAG) && (flags & __IEC_OUTPUT_FLAG)){
+#ifdef PRINT_DEBUG
 				printf("FORCE | OUTPUT\n");
+#endif
                 memcpy(real_value_p, visible_value_p, size);                                                  
             }                                                                                                 
         }                                                                                                     
         if(flags & __IEC_RETAIN_FLAG){                                                                        
+#ifdef PRINT_DEBUG
 			printf("RETAIN\n");
+#endif
             /* compute next cursor positon*/                                                                  
             unsigned int next_retain_offset = retain_offset + size;                                           
             /* if buffer not full */                                                                          
@@ -271,29 +281,23 @@ void RetainIterator(dbgvardsc_t *dsc){
 #define __RegisterDebugVariable_case_t(TYPENAME) \
         case TYPENAME##_ENUM :\
             ((__IEC_##TYPENAME##_t *)varp)->flags |= flags;\
-            if(force)\
-             ((__IEC_##TYPENAME##_t *)varp)->value = *((TYPENAME *)force);\
             break;
 #define __RegisterDebugVariable_case_p(TYPENAME)\
         case TYPENAME##_P_ENUM :\
             ((__IEC_##TYPENAME##_p *)varp)->flags |= flags;\
-            if(force)\
-             ((__IEC_##TYPENAME##_p *)varp)->fvalue = *((TYPENAME *)force);\
             break;\
         case TYPENAME##_O_ENUM :\
             ((__IEC_##TYPENAME##_p *)varp)->flags |= flags;\
-            if(force){\
-             ((__IEC_##TYPENAME##_p *)varp)->fvalue = *((TYPENAME *)force);\
-             *(((__IEC_##TYPENAME##_p *)varp)->value) = *((TYPENAME *)force);\
-            }\
             break;
 
-void RegisterDebugVariable(int idx, void* force)
+void RegisterDebugVariable(int idx /*, void* force*/)
 {
     if(idx  < sizeof(dbgvardsc)/sizeof(dbgvardsc_t)){
-        unsigned char flags = force ? __IEC_DEBUG_FLAG | __IEC_FORCE_FLAG :  __IEC_DEBUG_FLAG;
+        //unsigned char flags = force ? __IEC_DEBUG_FLAG | __IEC_FORCE_FLAG :  __IEC_DEBUG_FLAG;
+		unsigned char flags = __IEC_DEBUG_FLAG;
+#ifdef PRINT_DEBUG
 		printf("RegisterDebug flag: %01x\n", flags);		
-
+#endif
         dbgvardsc_t *dsc = &dbgvardsc[idx];
         void *varp = dsc->ptr;
         switch(dsc->type){
@@ -333,37 +337,65 @@ void ResetDebugVariables(void)
     __for_each_variable_do(ResetDebugVariablesIterator);
 }
 
+#define __SetDebugVariable_case_t(TYPENAME)\
+        case TYPENAME##_ENUM :\
+             ((__IEC_##TYPENAME##_t *)varp)->value = *((TYPENAME *)force);\
+			 printf("1\n");\
+            break;
+#define __SetDebugVariable_case_p(TYPENAME)\
+        case TYPENAME##_P_ENUM :\
+             ((__IEC_##TYPENAME##_p *)varp)->fvalue = *((TYPENAME *)force);\
+            break;\
+        case TYPENAME##_O_ENUM :\
+             ((__IEC_##TYPENAME##_p *)varp)->fvalue = *((TYPENAME *)force);\
+             *(((__IEC_##TYPENAME##_p *)varp)->value) = *((TYPENAME *)force);\
+            break;  
+
+void SetDebugVariable(int idx, void *force) {
+	
+	if(idx  < sizeof(dbgvardsc)/sizeof(dbgvardsc_t)){                                                         
+		dbgvardsc_t *dsc = &dbgvardsc[idx];                                                                   
+		void *varp = dsc->ptr;                                                                                
+		switch(dsc->type){                                                                                    
+			__ANY(__SetDebugVariable_case_t)                                                             
+			__ANY(__SetDebugVariable_case_p)                                                             
+		default:                                                                                              
+			break;                                                                                            
+		}                                                                                                     
+	}          
+}
 
 void run()
 {
 
-#if 0
-	BOOL var;
-
-    *__IX0_1 = (BOOL)1;
-	*__IX0_0 = (BOOL)1;
-#endif
 //	ResetDebugVariables();
+	/* SET WHAT VARIABLES FROM dbgvardsc TABLE YOU WANT DEBUG.
+	   BY THE FILE VARIABLES.csv you can do the correct cast of debug_buffer 
+	*/
+//	RegisterDebugVariable(0);
+	RegisterDebugVariable(1);
+	RegisterDebugVariable(2);
+	RegisterDebugVariable(3);
+//	RegisterDebugVariable(4);
 
-	__SET_VAR((&STD_RESSOURCE__INST0)->,INICIAR,,0);
-	__SET_VAR((&STD_RESSOURCE__INST0)->,PARAR,,0);
+
+	/* Set values to debug variables */
+	BOOL value1 = (BOOL)0;
+	BOOL value2 = (BOOL)1;
+
+	SetDebugVariable(1, &value1);
+	SetDebugVariable(2, &value2);
+
+//	__SET_VAR((&STD_RESSOURCE__INST0)->,INICIAR,,1);
+//	__SET_VAR((&STD_RESSOURCE__INST0)->,PARAR,,1);
 
     printf("Tick %d\n",tick);
     config_run__(tick++);
 
 
-
 	/* DEBUG */
 
-	if (tick == 1) {
-		char force = 1; //__IEC_DEBUG_FLAG; //| __IEC_FORCE_FLAG;
-
-	//	RegisterDebugVariable(0, &flag);
-	//	RegisterDebugVariable(1, &flag);
-		RegisterDebugVariable(2, &force);
-		RegisterDebugVariable(3, &force);
-		RegisterDebugVariable(4, &force);
-	}
+	// Iterate for all debug variables and copy to debug_buffer
 
 	//__SET_VAR(data__->           ,LAMP   ,,__GET_VAR(data__->AND15_OUT,));
 	/* Reset buffer cursor */                                                                         
@@ -371,8 +403,7 @@ void run()
     /* Iterate over all variables to fill debug buffer */                                             
     __for_each_variable_do(DebugIterator);   
 
-	int i = 0;
-	for(i = 0; i < BUFFER_SIZE; i++) {
+	for(int i = 0; i < BUFFER_SIZE; i++) {
 		printf("debug_buffer[%d] = %d\n", i, debug_buffer[i]);
 	}
 //	__for_each_variable_do(RetainIterator);
