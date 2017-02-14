@@ -35,7 +35,7 @@
 #include <string.h>                                                                                           
 #include <stdio.h>                                                                                            
 
-#define BUFFER_SIZE 180
+#define BUFFER_SIZE 20
 
 /* Atomically accessed variable for buffer state */                                                           
 #define BUFFER_FREE 0                                                                                         
@@ -114,6 +114,7 @@ typedef const struct {
 	__IEC_types_enum type;
 } dbgvardsc_t;  
 
+
 //SOMENTE VARIÁVEIS QUE NÃO SÃO LOCATED DEFINIDAS NO POUS.h
 
 /*
@@ -131,39 +132,58 @@ typedef struct {
 } MY_PROGRAM;
 
  */
-static dbgvardsc_t dbgvardsc[] = {                                                                            
-		{&(CONFIG__RESETCOUNTERVALUE), INT_ENUM},
-		{&(STD_RESSOURCE__INST0.INICIAR), BOOL_ENUM},
-		{&(STD_RESSOURCE__INST0.PARAR), BOOL_ENUM},
-		{&(STD_RESSOURCE__INST0.LAMP), BOOL_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST1), SINT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST2), INT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST3), DINT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST4), LINT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST5), USINT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST6), UINT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST7), UDINT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST8), ULINT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST9), REAL_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST10), LREAL_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST11), TIME_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST12), TIME_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST13), TIME_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST14), DATE_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST15), TOD_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST16), DT_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST17), STRING_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST18), BYTE_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST19), WORD_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST20), DWORD_ENUM},
-		{&(STD_RESSOURCE__INST0.TEST21), LWORD_ENUM},
-//		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[0]), SINT_P_ENUM},
-//		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[1]), SINT_P_ENUM},
-//		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[2]), SINT_ENUM},
-//		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[3]), SINT_ENUM},
-//		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[4]), SINT_ENUM},
-//		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[5]), SINT_ENUM},
-		{&(STD_RESSOURCE__INST0.AND15_OUT), BOOL_ENUM}
+
+/*
+ *
+ *
+  typedef struct {
+  SINT table [5];
+} __ARRAY_OF_SINT_5;
+
+typedef struct {
+  __ARRAY_OF_SINT_5 value;
+  IEC_BYTE flags;
+} __IEC___ARRAY_OF_SINT_5_t;
+\
+typedef struct {
+  __ARRAY_OF_SINT_5 *value;
+  IEC_BYTE flags;
+  __ARRAY_OF_SINT_5 fvalue;
+} __IEC___ARRAY_OF_SINT_5_p;
+
+ * */
+static dbgvardsc_t dbgvardsc[] = {
+//		{&(CONFIG__RESETCOUNTERVALUE), INT_ENUM},
+//		{&(STD_RESSOURCE__INST0.INICIAR),  BOOL_ENUM},
+//		{&(STD_RESSOURCE__INST0.PARAR),  BOOL_ENUM},
+//		{&(STD_RESSOURCE__INST0.LAMP),  BOOL_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST1),  SINT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST2),  INT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST3),  DINT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST4),  LINT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST5),  USINT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST6),  UINT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST7),  UDINT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST8),  ULINT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST9),  REAL_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST10),  LREAL_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST11),  TIME_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST12),  TIME_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST13),  TIME_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST14),  DATE_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST15),  TOD_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST16),  DT_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST17),  STRING_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST18),  BYTE_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST19),  WORD_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST20),  DWORD_ENUM},
+//		{&(STD_RESSOURCE__INST0.TEST21),  LWORD_ENUM},
+		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[0]), SINT_ENUM},
+		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[1]), SINT_ENUM},
+		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[2]), SINT_ENUM},
+		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[3]), SINT_ENUM},
+		{&((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[4]), SINT_ENUM},
+		{&(STD_RESSOURCE__INST0.AND15_OUT),  BOOL_ENUM}
 };      
 
 typedef void(*__for_each_variable_do_fp)(dbgvardsc_t*);                                                       
@@ -192,7 +212,7 @@ void __for_each_variable_do(__for_each_variable_do_fp fp)
 		forced_value_p = &((__IEC_##TYPENAME##_p *)varp)->fvalue;\
 		break;
 
-void* UnpackVar(dbgvardsc_t *dsc, void **real_value_p, char *flags)                                           
+void* UnpackVar(dbgvardsc_t *dsc, void **real_value_p, char *flags)
 {                                                                                                             
 	void *varp = dsc->ptr;
 	void *forced_value_p = NULL;
@@ -220,14 +240,45 @@ static inline void BufferIterator(dbgvardsc_t *dsc, int do_debug)
 
 	visible_value_p = UnpackVar(dsc, &real_value_p, &flags);
 
+#define PRINT_DEBUG
 #ifdef PRINT_DEBUG
-printf("flags: %01x\n", flags);
-printf("visible_value_p: %d\n", *(BOOL *)visible_value_p);
-printf("forced_value_p: %d\n", *(BOOL *)real_value_p);
+	USINT size = __get_type_enum_size(dsc->type);
+
+	if(dsc->type == BOOL_ENUM) {
+		BOOL var = 0;
+		memcpy(&var, real_value_p, sizeof(BOOL));
+		printf("BOOL var: %s - size: %d\n", var ? "TRUE" : "FALSE", size);
+	}
+	else if(dsc->type == SINT_ENUM) {
+		SINT var = 0;
+		memcpy(&var, real_value_p, sizeof(SINT));
+		printf("SINT var: %d - size: %d\n", var);
+	} else if(dsc->type == INT_ENUM) {
+		INT var = 0;
+		memcpy(&var, real_value_p, sizeof(INT));
+		printf("INT var: %d - size: %d\n", var);
+	} else if(dsc->type == DINT_ENUM) {
+		DINT var = 0;
+		memcpy(&var, real_value_p, sizeof(DINT));
+		printf("DINT var: %d - size: %d\n", var);
+	} else if(dsc->type == ULINT_ENUM) {
+		ULINT var = 0;
+		memcpy(&var, real_value_p, sizeof(ULINT));
+		printf("ULINT var: %d - size: %d\n", var);
+	} else if(dsc->type == REAL_ENUM) {
+		REAL var = 0;
+		memcpy(&var, real_value_p, sizeof(REAL));
+		printf("REAL var: %f - size: %d\n", var);
+	} else if(dsc->type == LREAL_ENUM) {
+		LREAL var = 0;
+		memcpy(&var, real_value_p, sizeof(LREAL));
+		printf("LREAL var: %f - size: %d\n", var);
+	}
 #endif
+#undef  PRINT_DEBUG
 
 if(flags & ( __IEC_DEBUG_FLAG | __IEC_RETAIN_FLAG)){
-	USINT size = __get_type_enum_size(dsc->type);
+
 
 	if(flags & __IEC_DEBUG_FLAG){
 #ifdef PRINT_DEBUG
@@ -328,7 +379,7 @@ void RegisterDebugVariable(int idx /*, void* force*/)
 		void *varp = dsc->ptr;
 		switch(dsc->type){
 		__ANY(__RegisterDebugVariable_case_t)
-            		__ANY(__RegisterDebugVariable_case_p)
+        __ANY(__RegisterDebugVariable_case_p)
 		default:
 			break;
 		}
@@ -342,7 +393,7 @@ void RegisterDebugVariablesByPointer(dbgvardsc_t *dsc) {
 
 	switch(dsc->type){
 	__ANY(__RegisterDebugVariable_case_t)
-            		__ANY(__RegisterDebugVariable_case_p)
+    __ANY(__RegisterDebugVariable_case_p)
 	default:
 		break;
 	}
@@ -432,27 +483,86 @@ void run()
 	RegisterDebugVariable(13);
 	RegisterDebugVariable(14);
 #endif
-	RegisterAllDebugVariable();
 
 
+//	RegisterAllDebugVariable();
 
+//	RegisterDebugVariable(26);
+//	RegisterDebugVariable(27);
+//	RegisterDebugVariable(28);
 
+#if 0
+	/*
+	 * Setting the elements of a array using the dbgvararraydsc
+	 * */
+	*(SINT *)(dbgvardsc[25].ptr + 0) = 11;
+	*(SINT *)(dbgvardsc[25].ptr + 1) = 12;
+	*(SINT *)(dbgvardsc[25].ptr + 2) = 13;
+	*(SINT *)(dbgvardsc[25].ptr + 3) = 14;
+	*(SINT *)(dbgvardsc[25].ptr + 4) = 15;
+#endif
 
+	/*
+	 * Setting elements of array using the variable name
+	 * */
+#if 0
+	void *ptr;
+	ptr = &((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(0) - (0)]);
+	*(SINT *)ptr = 11;
+	ptr = &((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(1) - (0)]);
+	*(SINT *)ptr = 12;
+	ptr = &((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(2) - (0)]);
+	*(SINT *)ptr = 13;
+	ptr = &((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(3) - (0)]);
+	*(SINT *)ptr = 14;
+	ptr = &((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(4) - (0)]);
+	*(SINT *)ptr = 15;
+#endif
+
+#if 0
+	printf("TESTARRAY[0]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(0) - (0)]);
+	printf("TESTARRAY[1]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(1) - (0)]);
+	printf("TESTARRAY[2]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(2) - (0)]);
+	printf("TESTARRAY[3]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(3) - (0)]);
+	printf("TESTARRAY[4]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(4) - (0)]);
+#endif
+
+#if 0
+	SINT *var;
+	var = &((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(0) - (0)]);
+	*var = 10;
+	var = &((&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(1) - (0)]);
+	*var = 11;
+
+	printf("TESTARRAY[0]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(0) - (0)]);
+	printf("TESTARRAY[1]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(1) - (0)]);
+	printf("TESTARRAY[2]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(2) - (0)]);
+	printf("TESTARRAY[3]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(3) - (0)]);
+	printf("TESTARRAY[4]: %d\n", (&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(4) - (0)]);
+#endif
+
+#if 1
 	/* Set values to debug variables */
-	BOOL value1 = (BOOL)1;
-	BOOL value2 = (BOOL)1;
+//	BOOL value1 = (BOOL)1;
+//	BOOL value2 = (BOOL)1;
+//
+//	SetDebugVariable(1, &value1);
+//	SetDebugVariable(2, &value2);
 
-	SetDebugVariable(1, &value1);
-	SetDebugVariable(2, &value2);
+	__SET_VAR((&STD_RESSOURCE__INST0)->,INICIAR,,1);
+	__SET_VAR((&STD_RESSOURCE__INST0)->,PARAR,,1);
+#endif
 
 	/*
 	 * HOW TO SET VARIABLES USING __SET_VAR or HARDCODED
 	 * */
 #if 0
 	__SET_VAR((&STD_RESSOURCE__INST0)->,INICIAR,,1);
+	(&STD_RESSOURCE__INST0)->INICIAR.value  = 1;
+
 	__SET_VAR((&STD_RESSOURCE__INST0)->,PARAR,,1);
 	__SET_VAR((&STD_RESSOURCE__INST0)->,TESTARRAY,.table[(0) - (0)],1);
-	(&STD_RESSOURCE__INST0)->TESTARRAY.value .table[(0) - (0)] = 1;
+	(&STD_RESSOURCE__INST0)->TESTARRAY.value.table[(0) - (0)] = 1;
 #endif
 
 	printf("Tick %d\n",tick);
@@ -469,10 +579,12 @@ void run()
 	/* Iterate over all variables to fill debug buffer */
 	__for_each_variable_do(DebugIterator);
 
+#if 1
 	for(int i = 0; i < BUFFER_SIZE; i++) {
 		printf("debug_buffer[%d] = %d\n", i, debug_buffer[i]);
 	}
 	//	__for_each_variable_do(RetainIterator);
+#endif
 
 }
 

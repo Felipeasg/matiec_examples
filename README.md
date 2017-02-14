@@ -22,9 +22,9 @@ To compile MATIEC you need to download and install [flex](https://github.com/wes
 To use MATIEC is need define some enviromnent variables used in the makefile of the examples
 
 ```
-	$ export MATIEC_INCLUDE_PATH=~/matiec/lib
-	$ export MATIEC_C_INCLUDE_PATH=~/matiec/lib/C
-	$ export PATH=~/matiec:$PATH
+	$ export MATIEC_INCLUDE_PATH=/home/user/matiec/lib
+	$ export MATIEC_C_INCLUDE_PATH=/home/user/matiec/lib/C
+	$ export PATH=/home/user/matiec:$PATH
 ```
 
 # Compiling the examples

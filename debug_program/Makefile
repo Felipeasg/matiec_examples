@@ -28,6 +28,7 @@ clean:
 	rm $(EXECUTABLE)
 
 $(IECGENERATEDSOURCES): $(STFILE)
+	@echo $(MATIEC_INCLUDE_PATH)
 	iec2c $(STFILE) -I $(MATIEC_INCLUDE_PATH)	
 
 fresh: | clean all

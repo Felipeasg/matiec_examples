@@ -1,0 +1,22 @@
+PROGRAM My_Program
+  VAR
+    iniciar AT %IX0.0 : BOOL := TRUE;
+    parar AT %IX0.1 : BOOL := TRUE;
+    lamp AT %QX0.0 : BOOL;
+  END_VAR
+  VAR
+    AND15_OUT : BOOL;
+  END_VAR
+
+  AND15_OUT := AND(iniciar, parar);
+  lamp := AND15_OUT;
+END_PROGRAM
+
+
+CONFIGURATION STD_CONF
+
+  RESOURCE STD_RESSOURCE ON PLC
+    TASK TaskMain(INTERVAL := T#50ms,PRIORITY := 0);
+    PROGRAM Inst0 WITH TaskMain : My_Program;
+  END_RESOURCE
+END_CONFIGURATION

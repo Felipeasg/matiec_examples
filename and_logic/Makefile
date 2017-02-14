@@ -1,4 +1,5 @@
-CC=gcc
+#CC=gcc
+CC=arm-none-eabi-gcc
 STFILE=main.st
 IECGENERATEDSOURCES=STD_CONF.c STD_RESSOURCE.c 
 SOURCES=$(IECGENERATEDSOURCES) plc.c  main.c
