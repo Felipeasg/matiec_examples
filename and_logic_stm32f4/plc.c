@@ -29,6 +29,12 @@
 #include "iec_std_lib.h"
 #include <stdio.h>
 
+#include "stm32f4_discovery.h"                                                                                
+#include "stm32f4xx_gpio.h"                                                                                   
+#include "stm32f4xx_rcc.h" 
+
+GPIO_InitTypeDef  GPIO_InitStructure;
+
 #define __print_BOOL(name) printf("  %s = (BOOL) %s\n",#name, name?"TRUE":"FALSE");
 #define __print_SINT(name) printf("  %s = (SINT) %d\n",#name, name);
 #define __print_INT(name) printf("  %s = (INT) %d\n",#name, name);
@@ -77,15 +83,33 @@ static int tick = 0;
 void run()
 {
 
-#if 1
-    *__IX0_1 = (BOOL)1;
-	*__IX0_0 = (BOOL)0;
+#if 0
+	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_13)) {
+	    *__IX0_0 = (BOOL)1;
+	} else {
+	    *__IX0_0 = (BOOL)0;
+	}
+	if(GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_14)) {
+	    *__IX0_1 = (BOOL)1;
+	} else {
+	    *__IX0_1 = (BOOL)0;
+	}
 #endif
 
     printf("Tick %d\n",tick);
     config_run__(tick++);
 
-#if 1
+#if 0
+	/* PD12 to be toggled */
+
+	if(*__QX0_0 == (BOOL)1) {	
+	    GPIO_SetBits(GPIOD, GPIO_Pin_12);
+	} else {
+		GPIO_ResetBits(GPIOD, GPIO_Pin_12);
+	}
+#endif
+
+#if 0
     printf("IX0.0 = %s\n", *__IX0_0? "TRUE" : "FALSE");
     printf("IX0.1 = %s\n", *__IX0_1? "TRUE" : "FALSE");
 

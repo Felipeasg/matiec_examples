@@ -23,9 +23,11 @@
 #include "iec_types.h"                                                                                        
 #include "iec_std_lib.h"  
 
+#if 1
 #include "stm32f4_discovery.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
+#endif
 
 //#include <stdio.h>                                                                                            
 //#include <string.h>                                                                                           
@@ -33,7 +35,7 @@
 //#include <signal.h>                                                                                           
                                                                                                               
 
-TIME __CURRENT_TIME;
+//TIME __CURRENT_TIME;
 
 /** @addtogroup STM32F4_Discovery_Peripheral_Examples
   * @{
@@ -67,6 +69,9 @@ int main(void)
         system_stm32f4xx.c file
      */
 
+  //Systick Configuration
+  SysTick_Config(SystemCoreClock/1000);
+
   /* GPIOD Periph clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
 
@@ -78,8 +83,17 @@ int main(void)
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
 
+  /* Configure PD12, PD13, PD14 and PD15 in output pushpull mode */
+  GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_13| GPIO_Pin_14| GPIO_Pin_15;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+  GPIO_Init(GPIOD, &GPIO_InitStructure);
+
   while (1)
   {
+#if 0
     /* PD12 to be toggled */
     GPIO_SetBits(GPIOD, GPIO_Pin_12);
     
@@ -112,7 +126,11 @@ int main(void)
 //	struct timespec CURRENT_TIME;                                                                             
 //    clock_gettime(CLOCK_REALTIME, &CURRENT_TIME);                                                             
 //    run(CURRENT_TIME.tv_sec, CURRENT_TIME.tv_nsec); 
+#endif
+		
 	run();
+
+	
   }
 }
 

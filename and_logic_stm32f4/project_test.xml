@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns:ns1="http://www.plcopen.org/xml/tc6.xsd" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.plcopen.org/xml/tc6_0201">
+  <fileHeader companyName="AIMIRIM" productName="test" productVersion="test" creationDateTime="2017-02-25T15:56:32"/>
+  <contentHeader name="project_test" modificationDateTime="2017-02-25T16:20:04">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="0" y="0"/>
+      </fbd>
+      <ld>
+        <scaling x="0" y="0"/>
+      </ld>
+      <sfc>
+        <scaling x="0" y="0"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="program0" pouType="program">
+        <interface>
+          <localVars>
+            <variable name="LocalVar0" address="%I0.0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="LocalVar2" address="%I0.1">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="LocalVar1" address="%Q0.0">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+            <variable name="LocalVar3" address="%I0.2">
+              <type>
+                <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <LD>
+            <leftPowerRail localId="1" height="40" width="3">
+              <position x="93" y="60"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="3" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <coil localId="2" height="15" width="21" negated="false">
+              <position x="393" y="72"/>
+              <connectionPointIn>
+                <relPosition x="0" y="8"/>
+                <connection refLocalId="8">
+                  <position x="393" y="80"/>
+                  <position x="281" y="80"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="8"/>
+              </connectionPointOut>
+              <variable>LocalVar1</variable>
+            </coil>
+            <contact localId="3" height="15" width="21" negated="false">
+              <position x="167" y="72"/>
+              <connectionPointIn>
+                <relPosition x="0" y="8"/>
+                <connection refLocalId="1">
+                  <position x="167" y="80"/>
+                  <position x="96" y="80"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="8"/>
+              </connectionPointOut>
+              <variable>LocalVar0</variable>
+            </contact>
+            <rightPowerRail localId="4" height="40" width="3">
+              <position x="484" y="60"/>
+              <connectionPointIn>
+                <relPosition x="0" y="20"/>
+                <connection refLocalId="2">
+                  <position x="484" y="80"/>
+                  <position x="414" y="80"/>
+                </connection>
+              </connectionPointIn>
+            </rightPowerRail>
+            <leftPowerRail localId="6" height="40" width="3">
+              <position x="93" y="100"/>
+              <connectionPointOut formalParameter="">
+                <relPosition x="3" y="20"/>
+              </connectionPointOut>
+            </leftPowerRail>
+            <contact localId="8" height="15" width="21" negated="true">
+              <position x="260" y="72"/>
+              <connectionPointIn>
+                <relPosition x="0" y="8"/>
+                <connection refLocalId="3">
+                  <position x="260" y="80"/>
+                  <position x="188" y="80"/>
+                </connection>
+                <connection refLocalId="9">
+                  <position x="260" y="80"/>
+                  <position x="222" y="80"/>
+                  <position x="222" y="122"/>
+                  <position x="188" y="122"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="8"/>
+              </connectionPointOut>
+              <variable>LocalVar2</variable>
+            </contact>
+            <contact localId="9" height="15" width="21" negated="false">
+              <position x="167" y="114"/>
+              <connectionPointIn>
+                <relPosition x="0" y="8"/>
+                <connection refLocalId="6">
+                  <position x="167" y="122"/>
+                  <position x="129" y="122"/>
+                  <position x="129" y="120"/>
+                  <position x="96" y="120"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="8"/>
+              </connectionPointOut>
+              <variable>LocalVar1</variable>
+            </contact>
+          </LD>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations>
+      <configuration name="configuration0">
+        <resource name="resource0">
+          <task name="task_0" priority="0" interval="T#500ms">
+            <pouInstance name="instance_0" typeName="program0"/>
+          </task>
+        </resource>
+      </configuration>
+    </configurations>
+  </instances>
+</project>

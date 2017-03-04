@@ -78,7 +78,7 @@ void run()
 {
 
     *__IX0_1 = (BOOL)1;
-	*__IX0_0 = (BOOL)0;
+	*__IX0_0 = (BOOL)1;
     
     printf("Tick %d\n",tick);
     config_run__(tick++);

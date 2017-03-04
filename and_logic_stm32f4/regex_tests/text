@@ -1,0 +1,11 @@
+Subject:
+    Security ID:        S-1-5-21-3368353891-1012177287-890106238-22451
+    Account Name:       ChamaraKer
+    Account Domain:     JIC
+    Logon ID:       0x1fffb
+
+Object:
+    Object Server:  Security
+    Object Type:    File
+    Object Name:    D:\ApacheTomcat\apache-tomcat-6.0.36\logs\localhost.2013-07-01.log
+    Handle ID:  0x11dc
