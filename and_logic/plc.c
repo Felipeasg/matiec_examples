@@ -68,6 +68,7 @@ TIME __CURRENT_TIME;
 #include "LOCATED_VARIABLES.h"
 #undef __LOCATED_VAR
 
+
 static int tick = 0;
 
 #define BUFFER_SIZE     1024
@@ -76,6 +77,7 @@ static int tick = 0;
 
 void run()
 {
+
 
     *__IX0_1 = (BOOL)1;
 	*__IX0_0 = (BOOL)1;
@@ -89,4 +91,3 @@ void run()
     printf("QX0.0 = %s\n", *__QX0_0? "TRUE" : "FALSE");
 
 }
-

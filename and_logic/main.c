@@ -37,6 +37,7 @@
 #include <string.h>
 #include <time.h>
 #include <signal.h>
+#include <unistd.h>
 #endif
 
 #include "iec_types.h"
@@ -44,6 +45,7 @@
 
 
 
+void config_init__(void);
 /*
  * Functions and variables provied by generated C softPLC
  **/ 
@@ -142,10 +144,10 @@ int main(int argc,char **argv)
     timerValues.it_interval.tv_sec = tv_sec;
     timerValues.it_interval.tv_nsec = tv_nsec;
 
-    printf("common_ticktime__: %ld ns\n", common_ticktime__);
+    printf("common_ticktime__: %d ns\n", common_ticktime__);
 
     printf("\n - timerValues - \n");
-    printf("interval tv_sec = %u, tv_nsec = %u\n", timerValues.it_interval.tv_sec, timerValues.it_interval.tv_nsec); 
+    printf("interval tv_sec = %ld, tv_nsec = %ld\n", timerValues.it_interval.tv_sec, timerValues.it_interval.tv_nsec); 
     printf("config_init__();\n");
     config_init__();
 

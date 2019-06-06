@@ -66,7 +66,7 @@ $(TARGET): $(EXECUTABLE)
 	@echo "Objcopy from ELF to IHEX complete!"
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) 
 	@echo "Linking complete!"
 
 %.o: %.c

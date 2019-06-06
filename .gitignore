@@ -8,3 +8,9 @@
 */STD_RESSOURCE.c
 */softplc
 */softplc.*
+
+*/.cproject
+*/.project
+*/.settings/
+*/*/*.o
+*/*/softplc

@@ -8,11 +8,12 @@ CFLAGS=-I $(MATIEC_C_INCLUDE_PATH) -c
 LDFLAGS=-lrt
 EXECUTABLE=softplc
 
+.PHONY: fresh clean all
 
 all: $(STFILE) $(IECGENERATEDSOURCES) $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
 .c.o:
 	$(CC) $(CFLAGS) $< -o $@

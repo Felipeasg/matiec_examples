@@ -9,7 +9,7 @@ EXECUTABLE=softplc
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	$(CC)  $(LDFLAGS) -o $@ $(OBJECTS)
 
 .c.o:
 	$(CC) $(CFLAGS) $< -o $@

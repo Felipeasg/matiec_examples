@@ -31,7 +31,7 @@ PROGRAM My_Program
 
   AND15_OUT := AND(iniciar, parar);
   lamp := AND15_OUT;
-  test23 := test22;
+  test23[0] := test22[0];
 END_PROGRAM
 
 
