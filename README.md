@@ -1,3 +1,5 @@
+
+
 # MATIEC examples
 
 MATIEC is a opensource compiler for programming languages defined in IEC 61131-3. This examples show how to use this compiler to test IEC 61131-3 programs in a softplc program. 
@@ -6,7 +8,7 @@ MATIEC is a opensource compiler for programming languages defined in IEC 61131-3
 
 ## Installing MATIEC
 
-To compile MATIEC you need to download and install [flex](https://github.com/westes/flex) and [bison](https://www.gnu.org/software/bison/). You can download compile and isntall or use your preferred package manager.
+To compile MATIEC you need to download and install [flex](https://github.com/westes/flex) and [bison](https://www.gnu.org/software/bison/). You can download compile and install or use your preferred package manager.
 	
 ```
 	$ cd ~/
